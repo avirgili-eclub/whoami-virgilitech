@@ -4,7 +4,7 @@ export const COPY = {
   es: {
     name: 'Alejandro Virgili',
     handle: '@avirgili',
-    tagline: 'Senior Developer & Builder',
+    tagline: 'Software Engineering & Builder',
     available: 'Disponible',
     bio: 'Ingeniero de software con +10 años construyendo soluciones backend robustas. Especializado en Java, Spring Boot y arquitecturas de microservicios. Apasionado por integrar IA en productos para automatizar flujos de trabajo y generar impacto real.',
     roles: ['🏗 Product Builder', '💻 Dev Senior', '🤖 AI Integration'],
@@ -35,7 +35,7 @@ export const COPY = {
   en: {
     name: 'Alejandro Virgili',
     handle: '@avirgili',
-    tagline: 'Senior Developer & Builder',
+    tagline: 'Software Engineering & Builder',
     available: 'Available',
     bio: 'Software engineer with 10+ years building robust backend solutions. Specialized in Java, Spring Boot and microservices architecture. Passionate about integrating AI into products to automate workflows and deliver real impact.',
     roles: ['🏗 Product Builder', '💻 Senior Dev', '🤖 AI Integration'],
