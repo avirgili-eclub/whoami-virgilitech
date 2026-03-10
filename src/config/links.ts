@@ -5,5 +5,5 @@ export const LINKS = {
   blog: 'https://virgilitech.dev/',
   youtube: null as null,              // null = mostrar como "Próximamente"
   activityFeed:
-    'https://raw.githubusercontent.com/avirgili/avirgili-activity/main/activity.json',
+    'https://raw.githubusercontent.com/avirgili-eclub/avirgili-activity/main/activity.json',
 } as const;
