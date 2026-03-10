@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import LinkCard from '../components/LinkCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import LiveCommitFeed from '../components/LiveCommitFeed';
+import ContactForm from '../components/ContactForm';
 import { LINKS } from '../config/links';
 import { COPY } from '../config/i18n';
 import { PROJECTS } from '../config/projects';
@@ -146,11 +147,34 @@ const en = COPY.en;
 
       </div>
 
+      <!-- ── CONTACT ──────────────────────────────────────── -->
+      <div style="position:relative; margin: 0 0 24px;">
+        <div class="divider" style="margin:0"></div>
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--bg); padding:0 16px;">
+          <span
+            class="label-section"
+            data-es={es.sections.contact}
+            data-en={en.sections.contact}
+          >
+            {es.sections.contact}
+          </span>
+        </div>
+      </div>
+
+      <section id="contact" aria-label="Contacto" style="margin-bottom: var(--sp-4xl);">
+        <ContactForm
+          client:load
+          endpoint={LINKS.formspree}
+          es={es.contact}
+          en={en.contact}
+        />
+      </section>
+
     </div>
   </main>
 
   <!-- ─── FOOTER ────────────────────────────────────────────── -->
-  <footer class="footer" id="contact" role="contentinfo">
+  <footer class="footer" role="contentinfo">
     <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
       <span
         class="footer-text"

@@ -15,6 +15,7 @@ export const COPY = {
       liveActivity: 'ACTIVIDAD EN VIVO',
       githubLive: 'GitHub en vivo',
       buildingNow: 'CONSTRUYENDO AHORA',
+      contact: 'CONTACTO',
     },
     links: {
       blog:     { title: 'Blog',     desc: 'Ideas, tech y aprendizajes' },
@@ -29,6 +30,18 @@ export const COPY = {
     feed: {
       empty: 'No hay actividad reciente',
       cols: { commit: 'commit', type: 'tipo', message: 'mensaje', repo: 'repo', time: 'hace' },
+    },
+    contact: {
+      heading: '¿Hablamos?',
+      desc: 'Abierto a nuevos proyectos, roles y colaboraciones. Mandame un mensaje y te respondo a la brevedad.',
+      name: 'Nombre',
+      email: 'Email',
+      message: 'Mensaje',
+      send: 'Enviar →',
+      sending: 'Enviando...',
+      success: '¡Mensaje enviado! Te respondo pronto.',
+      error: 'Algo falló. Intentá de nuevo.',
+      placeholders: { name: 'Tu nombre', email: 'tu@email.com', message: '¿En qué puedo ayudarte?' },
     },
     footer: 'Construido con ♥ por @avirgili',
   },
@@ -46,6 +59,7 @@ export const COPY = {
       liveActivity: 'LIVE ACTIVITY',
       githubLive: 'GitHub live',
       buildingNow: 'BUILDING NOW',
+      contact: 'CONTACT',
     },
     links: {
       blog:     { title: 'Blog',     desc: 'Ideas, tech & learnings' },
@@ -60,6 +74,18 @@ export const COPY = {
     feed: {
       empty: 'No recent activity',
       cols: { commit: 'commit', type: 'type', message: 'message', repo: 'repo', time: 'ago' },
+    },
+    contact: {
+      heading: "Let's talk?",
+      desc: "Open to new projects, roles and collaborations. Send me a message and I'll get back to you soon.",
+      name: 'Name',
+      email: 'Email',
+      message: 'Message',
+      send: 'Send →',
+      sending: 'Sending...',
+      success: "Message sent! I'll get back to you soon.",
+      error: 'Something went wrong. Please try again.',
+      placeholders: { name: 'Your name', email: 'you@email.com', message: 'How can I help you?' },
     },
     footer: 'Built with ♥ by @avirgili',
   },
