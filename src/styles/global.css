@@ -726,6 +726,16 @@ p  { color: var(--text-2); }
   box-shadow: var(--shadow-md);
 }
 
+.project-card.clickable { cursor: pointer; }
+
+.project-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
 .project-top {
   display: flex;
   align-items: flex-start;
@@ -752,6 +762,7 @@ p  { color: var(--text-2); }
 
 .status-active-badge { background: var(--status-active-bg); color: var(--status-active-text); }
 .status-beta-badge   { background: var(--status-beta-bg);   color: var(--status-beta); }
+.status-wip-badge    { background: #FFF7ED;                 color: #C2410C; }
 .status-paused-badge { background: var(--status-neutral-bg);color: var(--status-neutral); }
 
 .project-stack {
