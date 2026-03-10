@@ -1,0 +1,101 @@
+---
+import AnimatedTerminal from './AnimatedTerminal';
+import { LINKS } from '../config/links';
+import { COPY } from '../config/i18n';
+
+const es = COPY.es;
+const en = COPY.en;
+---
+
+<section class="hero" aria-label="Presentación personal" id="about">
+
+  <!-- Left: Identity -->
+  <div class="hero-identity">
+
+    <div class="hero-top">
+      <!-- Avatar -->
+      <div class="avatar-wrap" aria-hidden="true">
+        <div class="avatar-ring">
+          <div class="avatar-inner">AV</div>
+        </div>
+        <span
+          class="status-dot"
+          title="Disponible"
+          aria-label="Disponible para proyectos"
+        ></span>
+      </div>
+
+      <!-- Name + handle + tagline -->
+      <div class="hero-name-block">
+        <h1 data-es={es.name} data-en={en.name}>{es.name}</h1>
+        <span class="hero-handle" data-es={es.handle} data-en={en.handle}>
+          {es.handle}
+        </span>
+        <span class="hero-tagline" data-es={es.tagline} data-en={en.tagline}>
+          {es.tagline}
+        </span>
+      </div>
+    </div>
+
+    <!-- Role chips -->
+    <div class="chips" role="list" aria-label="Roles">
+      <span class="chip" role="listitem">🏗 Product Builder</span>
+      <span class="chip" role="listitem">💻 Dev Senior</span>
+      <span class="chip accent" role="listitem">🚀 Builder</span>
+    </div>
+
+    <!-- Bio -->
+    <p class="hero-bio" data-es={es.bio} data-en={en.bio}>
+      {es.bio}
+    </p>
+
+    <!-- Social links -->
+    <div class="social-links" role="list" aria-label="Redes sociales">
+      <a
+        href={LINKS.linkedin}
+        class="social-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="listitem"
+        aria-label="LinkedIn"
+      >
+        🔗 LinkedIn
+      </a>
+      <a
+        href={LINKS.github}
+        class="social-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="listitem"
+        aria-label="GitHub"
+      >
+        ⚡ GitHub
+      </a>
+      <a
+        href={LINKS.blog}
+        class="social-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="listitem"
+        aria-label="Blog"
+      >
+        ✍ Blog
+      </a>
+    </div>
+
+  </div><!-- /hero-identity -->
+
+  <!-- Right: Animated Terminal — React island -->
+  <div class="hero-terminal-col">
+    <AnimatedTerminal client:load />
+  </div>
+
+</section>
+
+<script>
+  // Sync commit text to terminal when feed loads it
+  window.addEventListener('commitloaded', (e: Event) => {
+    const detail = (e as CustomEvent<string>).detail;
+    window.dispatchEvent(new CustomEvent('terminalcommit', { detail }));
+  });
+</script>

@@ -1,0 +1,58 @@
+---
+import type { Project } from '../config/projects';
+import { COPY } from '../config/i18n';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const statusLabel = {
+  active: '● Active',
+  beta:   '● Beta',
+  paused: '● Paused',
+};
+
+const statusClass = {
+  active: 'status-badge status-active-badge',
+  beta:   'status-badge status-beta-badge',
+  paused: 'status-badge status-paused-badge',
+};
+
+const ariaStatus = {
+  active: 'Activo',
+  beta:   'Beta',
+  paused: 'Pausado',
+};
+---
+
+<article
+  class={`project-card${project.status === 'paused' ? ' paused' : ''}`}
+  aria-label={`Proyecto ${project.title}`}
+>
+  <div class="project-top">
+    <span class="project-icon" aria-hidden="true">{project.icon}</span>
+    <div class="project-title-wrap">
+      <h3 class="project-title">{project.title}</h3>
+      <p
+        class="project-tagline"
+        data-es={project.tagline}
+        data-en={project.taglineEN}
+      >
+        {project.tagline}
+      </p>
+    </div>
+    <span
+      class={statusClass[project.status]}
+      aria-label={`Estado: ${ariaStatus[project.status]}`}
+    >
+      {statusLabel[project.status]}
+    </span>
+  </div>
+  <div class="project-stack">
+    {project.stack.map((chip, i) => (
+      <span class={`stack-chip${i === 0 ? ' primary' : ''}`}>{chip}</span>
+    ))}
+  </div>
+</article>

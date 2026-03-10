@@ -1,0 +1,52 @@
+---
+import LangToggle from './LangToggle';
+import { LINKS } from '../config/links';
+import { COPY } from '../config/i18n';
+
+const es = COPY.es;
+---
+
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container navbar-inner">
+
+    <a href="/" class="nav-brand" aria-label="Ir al inicio">@avirgili</a>
+
+    <ul class="nav-links" role="list">
+      <li>
+        <a href="#about" data-es={es.nav.about} data-en={COPY.en.nav.about}>
+          {es.nav.about}
+        </a>
+      </li>
+      <li>
+        <a href="#projects" data-es={es.nav.projects} data-en={COPY.en.nav.projects}>
+          {es.nav.projects}
+        </a>
+      </li>
+      <li>
+        <a href="#blog" data-es={es.nav.blog} data-en={COPY.en.nav.blog}>
+          {es.nav.blog}
+        </a>
+      </li>
+      <li>
+        <a href="#contact" data-es={es.nav.contact} data-en={COPY.en.nav.contact}>
+          {es.nav.contact}
+        </a>
+      </li>
+    </ul>
+
+    <!-- Language toggle — React island -->
+    <LangToggle client:load />
+
+    <!-- CV CTA -->
+    <a
+      href={LINKS.cv}
+      class="btn-cv"
+      data-es={es.cta.cv}
+      data-en={COPY.en.cta.cv}
+      aria-label="Ver curriculum vitae"
+    >
+      {es.cta.cv}
+    </a>
+
+  </div>
+</nav>

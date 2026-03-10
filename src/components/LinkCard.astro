@@ -1,0 +1,42 @@
+---
+interface Props {
+  icon: string;
+  titleEs: string;
+  titleEn: string;
+  descEs: string;
+  descEn: string;
+  ctaEs: string;
+  ctaEn: string;
+  href?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
+}
+
+const { icon, titleEs, titleEn, descEs, descEn, ctaEs, ctaEn, href, disabled = false, ariaLabel } = Astro.props;
+---
+
+{disabled ? (
+  <div
+    class="link-card disabled"
+    aria-label={ariaLabel ?? titleEs + ' — próximamente'}
+    aria-disabled="true"
+  >
+    <span class="link-icon dim">{icon}</span>
+    <span class="link-title muted" data-es={titleEs} data-en={titleEn}>{titleEs}</span>
+    <span class="link-desc dim" data-es={descEs} data-en={descEn}>{descEs}</span>
+    <span class="link-cta muted" data-es={ctaEs} data-en={ctaEn}>{ctaEs}</span>
+  </div>
+) : (
+  <a
+    href={href}
+    class="link-card"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={ariaLabel ?? 'Ir a ' + titleEs}
+  >
+    <span class="link-icon">{icon}</span>
+    <span class="link-title" data-es={titleEs} data-en={titleEn}>{titleEs}</span>
+    <span class="link-desc" data-es={descEs} data-en={descEn}>{descEs}</span>
+    <span class="link-cta" data-es={ctaEs} data-en={ctaEn}>{ctaEs}</span>
+  </a>
+)}

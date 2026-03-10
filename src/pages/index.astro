@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import LinkCard from '../components/LinkCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import LiveCommitFeed from '../components/LiveCommitFeed';
+import { LINKS } from '../config/links';
+import { COPY } from '../config/i18n';
+import { PROJECTS } from '../config/projects';
+
+const es = COPY.es;
+const en = COPY.en;
+---
+
+<BaseLayout>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
+  <Navbar />
+
+  <!-- ─── MAIN ──────────────────────────────────────────────── -->
+  <main id="about">
+    <div class="container">
+
+      <!-- ── HERO ─────────────────────────────────────────── -->
+      <Hero />
+
+      <!-- DIVIDER + EXPLORE label -->
+      <div style="position:relative; margin: 0 0 24px;">
+        <div class="divider" style="margin:0"></div>
+        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:var(--bg); padding:0 16px;">
+          <span
+            class="label-section"
+            data-es={es.sections.explore}
+            data-en={en.sections.explore}
+          >
+            {es.sections.explore}
+          </span>
+        </div>
+      </div>
+
+      <!-- ── QUICK LINKS ──────────────────────────────────── -->
+      <section id="blog" aria-label="Links de interés" style="margin-bottom: var(--sp-3xl);">
+        <div class="links-grid">
+
+          <LinkCard
+            icon="✍️"
+            titleEs={es.links.blog.title}
+            titleEn={en.links.blog.title}
+            descEs={es.links.blog.desc}
+            descEn={en.links.blog.desc}
+            ctaEs={es.cta.read}
+            ctaEn={en.cta.read}
+            href={LINKS.blog}
+            ariaLabel="Ir al blog"
+          />
+
+          <LinkCard
+            icon="💼"
+            titleEs={es.links.linkedin.title}
+            titleEn={en.links.linkedin.title}
+            descEs={es.links.linkedin.desc}
+            descEn={en.links.linkedin.desc}
+            ctaEs={es.cta.connect}
+            ctaEn={en.cta.connect}
+            href={LINKS.linkedin}
+            ariaLabel="Ver perfil de LinkedIn"
+          />
+
+          <LinkCard
+            icon="⚡"
+            titleEs={es.links.github.title}
+            titleEn={en.links.github.title}
+            descEs={es.links.github.desc}
+            descEn={en.links.github.desc}
+            ctaEs={es.cta.view}
+            ctaEn={en.cta.view}
+            href={LINKS.github}
+            ariaLabel="Ver perfil de GitHub"
+          />
+
+          <LinkCard
+            icon="▶️"
+            titleEs={es.links.youtube.title}
+            titleEn={en.links.youtube.title}
+            descEs={es.links.youtube.desc}
+            descEn={en.links.youtube.desc}
+            ctaEs={es.cta.soon}
+            ctaEn={en.cta.soon}
+            disabled={true}
+            ariaLabel="YouTube próximamente"
+          />
+
+        </div>
+      </section>
+
+      <!-- ── BOTTOM ROW: Feed + Projects ─────────────────── -->
+      <div class="bottom-row" style="margin-bottom: var(--sp-4xl);">
+
+        <!-- Live GitHub Feed -->
+        <section aria-label="Actividad reciente de GitHub">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span
+              class="label-section"
+              data-es={es.sections.liveActivity}
+              data-en={en.sections.liveActivity}
+            >
+              {es.sections.liveActivity}
+            </span>
+            <span class="live-dot" aria-hidden="true"></span>
+            <span
+              style="font-size:12px; color:var(--text-muted);"
+              data-es={es.sections.githubLive}
+              data-en={en.sections.githubLive}
+            >
+              {es.sections.githubLive}
+            </span>
+          </div>
+
+          <LiveCommitFeed
+            client:load
+            feedUrl={LINKS.activityFeed}
+            limit={5}
+            pollInterval={60000}
+          />
+        </section>
+
+        <!-- Current Projects -->
+        <section id="projects" aria-label="Proyectos actuales">
+          <div style="margin-bottom:12px;">
+            <span
+              class="label-section"
+              data-es={es.sections.buildingNow}
+              data-en={en.sections.buildingNow}
+            >
+              {es.sections.buildingNow}
+            </span>
+          </div>
+
+          <div class="projects-stack">
+            {PROJECTS.map((project) => (
+              <ProjectCard project={project} />
+            ))}
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer class="footer" id="contact" role="contentinfo">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+      <span
+        class="footer-text"
+        data-es={es.footer}
+        data-en={en.footer}
+      >
+        {es.footer}
+      </span>
+      <span class="footer-text" style="font-size:12px; color:var(--text-disabled);">
+        virgilitech.dev · 2026
+      </span>
+    </div>
+  </footer>
+
+  <!-- ─── i18n INIT SCRIPT ──────────────────────────────────── -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('lang') as 'es' | 'en' | null;
+      const lang: 'es' | 'en' = saved === 'en' ? 'en' : 'es';
+
+      if (lang === 'en') {
+        document.documentElement.lang = 'en';
+        document.querySelectorAll<HTMLElement>('[data-es][data-en]').forEach((el) => {
+          const val = el.dataset['en'];
+          if (val) el.textContent = val;
+        });
+      }
+
+      window.addEventListener('langchange', (e: Event) => {
+        const l = (e as CustomEvent<'es' | 'en'>).detail;
+        document.documentElement.lang = l;
+        document.querySelectorAll<HTMLElement>('[data-es][data-en]').forEach((el) => {
+          const val = el.dataset[l];
+          if (val) el.textContent = val;
+        });
+      });
+    })();
+  </script>
+
+</BaseLayout>
