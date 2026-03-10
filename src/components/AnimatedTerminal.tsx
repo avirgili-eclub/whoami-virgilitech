@@ -45,7 +45,6 @@ interface Props {
 
 export default function AnimatedTerminal({ lastCommit }: Props) {
   const bodyRef = useRef<HTMLDivElement>(null);
-  const cancelRef = useRef(false);
   const [lang, setLang] = useState<'es' | 'en'>('es');
   const [commitText, setCommitText] = useState(
     lastCommit ?? 'a3f2b1c  feat: loading latest commit...',
@@ -73,61 +72,63 @@ export default function AnimatedTerminal({ lastCommit }: Props) {
   }, []);
 
   useEffect(() => {
-    cancelRef.current = false;
+    // Each effect run gets its own cancelled flag — prevents parallel animations
+    let cancelled = false;
+
+    async function runAnimation() {
+      const body = bodyRef.current;
+      if (!body) return;
+      body.innerHTML = '';
+
+      const lines = lang === 'en' ? LINES_EN : LINES_ES;
+
+      for (const line of lines) {
+        if (cancelled) return;
+
+        if (line.type === 'empty') {
+          const el = document.createElement('div');
+          el.className = 'term-empty';
+          body.appendChild(el);
+          await sleep(80);
+          continue;
+        }
+
+        const text = line.type === 'commit' ? commitText : (line.text ?? '');
+        const lineEl = document.createElement('div');
+        lineEl.className = 'term-line';
+        body.appendChild(lineEl);
+
+        const span = document.createElement('span');
+        span.className =
+          line.type === 'prompt' ? 'term-prompt'
+          : line.type === 'string' ? 'term-string'
+          : line.type === 'commit' ? 'term-commit'
+          : 'term-output';
+        lineEl.appendChild(span);
+
+        const charDelay = line.type === 'prompt' ? 38 : 12;
+        for (const ch of text) {
+          if (cancelled) return;
+          span.textContent += ch;
+          await sleep(charDelay);
+        }
+        if (line.type === 'prompt') await sleep(300);
+      }
+
+      // Blinking cursor
+      if (!cancelled) {
+        const cursorLine = document.createElement('div');
+        cursorLine.className = 'term-line';
+        const cursor = document.createElement('span');
+        cursor.className = 'term-cursor';
+        cursorLine.appendChild(cursor);
+        body.appendChild(cursorLine);
+      }
+    }
+
     runAnimation();
-    return () => { cancelRef.current = true; };
-  }, [lang, commitText]); // re-run when lang or commit changes
-
-  async function runAnimation() {
-    const body = bodyRef.current;
-    if (!body) return;
-    body.innerHTML = '';
-
-    const lines = lang === 'en' ? LINES_EN : LINES_ES;
-
-    for (const line of lines) {
-      if (cancelRef.current) return;
-
-      if (line.type === 'empty') {
-        const el = document.createElement('div');
-        el.className = 'term-empty';
-        body.appendChild(el);
-        await sleep(80);
-        continue;
-      }
-
-      const text = line.type === 'commit' ? commitText : (line.text ?? '');
-      const lineEl = document.createElement('div');
-      lineEl.className = 'term-line';
-      body.appendChild(lineEl);
-
-      const span = document.createElement('span');
-      span.className =
-        line.type === 'prompt' ? 'term-prompt'
-        : line.type === 'string' ? 'term-string'
-        : line.type === 'commit' ? 'term-commit'
-        : 'term-output';
-      lineEl.appendChild(span);
-
-      const charDelay = line.type === 'prompt' ? 38 : 12;
-      for (const ch of text) {
-        if (cancelRef.current) return;
-        span.textContent += ch;
-        await sleep(charDelay);
-      }
-      if (line.type === 'prompt') await sleep(300);
-    }
-
-    // Blinking cursor
-    if (!cancelRef.current) {
-      const cursorLine = document.createElement('div');
-      cursorLine.className = 'term-line';
-      const cursor = document.createElement('span');
-      cursor.className = 'term-cursor';
-      cursorLine.appendChild(cursor);
-      body.appendChild(cursorLine);
-    }
-  }
+    return () => { cancelled = true; };
+  }, [lang, commitText]);
 
   return (
     <div className="terminal" role="complementary" aria-label="Terminal interactivo">
