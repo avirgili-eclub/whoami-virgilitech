@@ -6,8 +6,8 @@ export const COPY = {
     handle: '@avirgili',
     tagline: 'Senior Developer & Builder',
     available: 'Disponible',
-    bio: 'Builder de productos digitales desde cero hasta producción. Especializado en apps móviles, sistemas con IA y arquitecturas que escalan. Apasionado por construir herramientas que hacen la diferencia.',
-    roles: ['🏗 Product Builder', '💻 Dev Senior', '🚀 Builder'],
+    bio: 'Ingeniero de software con +10 años construyendo soluciones backend robustas. Especializado en Java, Spring Boot y arquitecturas de microservicios. Apasionado por integrar IA en productos para automatizar flujos de trabajo y generar impacto real.',
+    roles: ['🏗 Product Builder', '💻 Dev Senior', '🤖 AI Integration'],
     nav: { about: 'Acerca', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto' },
     cta: { cv: 'Ver CV →', soon: 'Próximamente', read: 'Leer →', connect: 'Conectar →', view: 'Ver →' },
     sections: {
@@ -37,8 +37,8 @@ export const COPY = {
     handle: '@avirgili',
     tagline: 'Senior Developer & Builder',
     available: 'Available',
-    bio: 'Digital product builder from zero to production. Specialized in mobile apps, AI systems and architectures that scale. Passionate about building tools that make a difference.',
-    roles: ['🏗 Product Builder', '💻 Senior Dev', '🚀 Builder'],
+    bio: 'Software engineer with 10+ years building robust backend solutions. Specialized in Java, Spring Boot and microservices architecture. Passionate about integrating AI into products to automate workflows and deliver real impact.',
+    roles: ['🏗 Product Builder', '💻 Senior Dev', '🤖 AI Integration'],
     nav: { about: 'About', projects: 'Projects', blog: 'Blog', contact: 'Contact' },
     cta: { cv: 'View CV →', soon: 'Coming soon', read: 'Read →', connect: 'Connect →', view: 'View →' },
     sections: {
