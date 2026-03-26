@@ -4,6 +4,7 @@ import { LINKS } from '../config/links';
 import { COPY } from '../config/i18n';
 
 const es = COPY.es;
+const en = COPY.en;
 ---
 
 <nav class="navbar" role="navigation" aria-label="Navegación principal">
@@ -13,22 +14,22 @@ const es = COPY.es;
 
     <ul class="nav-links" role="list">
       <li>
-        <a href="#about" data-es={es.nav.about} data-en={COPY.en.nav.about}>
+        <a href="#about" data-es={es.nav.about} data-en={en.nav.about}>
           {es.nav.about}
         </a>
       </li>
       <li>
-        <a href="#projects" data-es={es.nav.projects} data-en={COPY.en.nav.projects}>
+        <a href="#projects" data-es={es.nav.projects} data-en={en.nav.projects}>
           {es.nav.projects}
         </a>
       </li>
       <li>
-        <a href={LINKS.blog} target="_blank" rel="noopener noreferrer" data-es={es.nav.blog} data-en={COPY.en.nav.blog}>
+        <a href={LINKS.blog} target="_blank" rel="noopener noreferrer" data-es={es.nav.blog} data-en={en.nav.blog}>
           {es.nav.blog}
         </a>
       </li>
       <li>
-        <a href="#contact" data-es={es.nav.contact} data-en={COPY.en.nav.contact}>
+        <a href="#contact" data-es={es.nav.contact} data-en={en.nav.contact}>
           {es.nav.contact}
         </a>
       </li>
@@ -37,16 +38,191 @@ const es = COPY.es;
     <!-- Language toggle — React island -->
     <LangToggle client:load />
 
-    <!-- CV CTA -->
-    <a
-      href={LINKS.cv}
+    <!-- CV CTA — opens panel -->
+    <button
+      type="button"
       class="btn-cv"
+      id="cv-panel-trigger"
       data-es={es.cta.cv}
-      data-en={COPY.en.cta.cv}
+      data-en={en.cta.cv}
       aria-label="Ver curriculum vitae"
     >
       {es.cta.cv}
-    </a>
+    </button>
 
   </div>
 </nav>
+
+<!-- ============================================================
+     CV PANEL — slide-in from right
+     ============================================================ -->
+<div class="cv-backdrop" id="cv-backdrop" aria-hidden="true"></div>
+
+<aside class="cv-panel" id="cv-panel" role="dialog" aria-modal="true" aria-label="Curriculum Vitae">
+  <button class="cv-panel-close" id="cv-panel-close" aria-label="Cerrar panel">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <h2 class="cv-panel-title" data-es={es.cvPanel.title} data-en={en.cvPanel.title}>
+    {es.cvPanel.title}
+  </h2>
+
+  <div class="cv-panel-options">
+    <!-- Preview card -->
+    <button class="cv-option-card" id="cv-preview-btn" type="button">
+      <span class="cv-option-icon">👁</span>
+      <span class="cv-option-label" data-es={es.cvPanel.preview} data-en={en.cvPanel.preview}>
+        {es.cvPanel.preview}
+      </span>
+      <span class="cv-option-desc" data-es={es.cvPanel.previewDesc} data-en={en.cvPanel.previewDesc}>
+        {es.cvPanel.previewDesc}
+      </span>
+    </button>
+
+    <!-- Download card -->
+    <a
+      href="/cv-es.pdf"
+      download="Alejandro_Virgili_CV_ES.pdf"
+      class="cv-option-card"
+      id="cv-download-btn"
+    >
+      <span class="cv-option-icon">📄</span>
+      <span class="cv-option-label" data-es={es.cvPanel.download} data-en={en.cvPanel.download}>
+        {es.cvPanel.download}
+      </span>
+      <span class="cv-option-desc" data-es={es.cvPanel.downloadDesc} data-en={en.cvPanel.downloadDesc}>
+        {es.cvPanel.downloadDesc}
+      </span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============================================================
+     CV VIEWER — fullscreen overlay with iframe
+     ============================================================ -->
+<div class="cv-viewer-backdrop" id="cv-viewer-backdrop" aria-hidden="true"></div>
+
+<div class="cv-viewer" id="cv-viewer" role="dialog" aria-modal="true" aria-label="CV Preview">
+  <button class="cv-viewer-close" id="cv-viewer-close" aria-label="Cerrar vista previa">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+  <iframe class="cv-viewer-iframe" id="cv-viewer-iframe" title="Curriculum Vitae Preview"></iframe>
+</div>
+
+<script>
+  (function () {
+    const trigger = document.getElementById('cv-panel-trigger')!;
+    const backdrop = document.getElementById('cv-backdrop')!;
+    const panel = document.getElementById('cv-panel')!;
+    const panelClose = document.getElementById('cv-panel-close')!;
+    const previewBtn = document.getElementById('cv-preview-btn')!;
+    const downloadBtn = document.getElementById('cv-download-btn') as HTMLAnchorElement;
+
+    const viewerBackdrop = document.getElementById('cv-viewer-backdrop')!;
+    const viewer = document.getElementById('cv-viewer')!;
+    const viewerClose = document.getElementById('cv-viewer-close')!;
+    const viewerIframe = document.getElementById('cv-viewer-iframe') as HTMLIFrameElement;
+
+    let panelOpen = false;
+    let viewerOpen = false;
+
+    /** Read current language from localStorage (defaults to 'es') */
+    function getCurrentLang(): 'es' | 'en' {
+      const saved = localStorage.getItem('lang');
+      return saved === 'en' ? 'en' : 'es';
+    }
+
+    /** Update download link href and download attribute for the given language */
+    function syncDownloadLink(lang: 'es' | 'en') {
+      const suffix = lang.toUpperCase();
+      downloadBtn.href = `/cv-${lang}.pdf`;
+      downloadBtn.download = `Alejandro_Virgili_CV_${suffix}.pdf`;
+    }
+
+    /** Update iframe src if the viewer is currently open */
+    function syncViewerIframe(lang: 'es' | 'en') {
+      if (viewerOpen) {
+        viewerIframe.src = `/cv-v2-modern-${lang}.html`;
+      }
+    }
+
+    function openPanel() {
+      // Sync CV URLs to current language every time the panel opens
+      const lang = getCurrentLang();
+      syncDownloadLink(lang);
+
+      panelOpen = true;
+      backdrop.classList.add('active');
+      panel.classList.add('active');
+      backdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      panelOpen = false;
+      backdrop.classList.remove('active');
+      panel.classList.remove('active');
+      backdrop.setAttribute('aria-hidden', 'true');
+      if (!viewerOpen) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function openViewer() {
+      closePanel();
+      viewerOpen = true;
+      const lang = getCurrentLang();
+      viewerIframe.src = `/cv-v2-modern-${lang}.html`;
+      viewerBackdrop.classList.add('active');
+      viewer.classList.add('active');
+      viewerBackdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeViewer() {
+      viewerOpen = false;
+      viewerBackdrop.classList.remove('active');
+      viewer.classList.remove('active');
+      viewerBackdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      // Delay clearing src to allow close animation
+      setTimeout(() => {
+        if (!viewerOpen) viewerIframe.src = '';
+      }, 300);
+    }
+
+    // Listen for language changes (dispatched by LangToggle)
+    window.addEventListener('langchange', ((e: CustomEvent<string>) => {
+      const lang = e.detail === 'en' ? 'en' : 'es';
+      syncDownloadLink(lang);
+      syncViewerIframe(lang);
+    }) as EventListener);
+
+    // Event listeners
+    trigger.addEventListener('click', openPanel);
+    backdrop.addEventListener('click', closePanel);
+    panelClose.addEventListener('click', closePanel);
+    previewBtn.addEventListener('click', openViewer);
+
+    downloadBtn.addEventListener('click', () => {
+      setTimeout(closePanel, 300);
+    });
+
+    viewerBackdrop.addEventListener('click', closeViewer);
+    viewerClose.addEventListener('click', closeViewer);
+
+    // ESC key closes active overlay
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (viewerOpen) closeViewer();
+        else if (panelOpen) closePanel();
+      }
+    });
+  })();
+</script>

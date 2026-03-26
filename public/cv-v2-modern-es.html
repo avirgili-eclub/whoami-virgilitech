@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alejandro Virgili — Ingeniero de Software CV</title>
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark: #0f0f23;
+      --dark-alt: #1a1a2e;
+      --accent: #2563eb;
+      --accent-light: #e0ecff;
+      --accent-text: #1d4ed8;
+      --text: #333;
+      --text-light: #6b7280;
+      --border: #e5e7eb;
+      --white: #ffffff;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+    }
+
+    html { font-size: 15px; }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: #f3f4f6;
+      line-height: 1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ========== PAGE WRAPPER ========== */
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 0 40px rgba(0,0,0,0.08);
+    }
+
+    /* ========== HEADER / HERO ========== */
+    .hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 48px 48px 36px;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .hero .subtitle {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .contact-row span { white-space: nowrap; }
+
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: rgba(37, 99, 235, 0.2);
+      color: #93bbfc;
+      transition: background 0.2s;
+    }
+
+    .pill:hover { background: rgba(37, 99, 235, 0.35); text-decoration: none; }
+
+    /* ========== BODY ========== */
+    .body { padding: 36px 48px 48px; }
+
+    /* ========== SECTIONS ========== */
+    .section { margin-bottom: 32px; }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+    }
+
+    /* ========== PROFILE ========== */
+    .profile p {
+      font-size: 0.95rem;
+      color: #4b5563;
+      line-height: 1.65;
+    }
+
+    /* ========== SKILLS TAGS ========== */
+    .skills-group { margin-bottom: 10px; }
+
+    .skills-group-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      background: var(--accent-light);
+      color: var(--accent-text);
+    }
+
+    /* ========== TIMELINE ========== */
+    .timeline { position: relative; padding-left: 24px; }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-entry {
+      position: relative;
+      margin-bottom: 26px;
+      page-break-inside: avoid;
+    }
+
+    .timeline-entry:last-child { margin-bottom: 0; }
+
+    .timeline-entry::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 7px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .entry-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .entry-role {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .entry-company {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .entry-meta {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 6px;
+    }
+
+    .entry-stack {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .entry-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .entry-bullets li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      color: #4b5563;
+    }
+
+    .entry-bullets li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ========== PROJECT CARDS ========== */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      page-break-inside: avoid;
+    }
+
+    .project-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .project-card .project-stack {
+      font-size: 0.76rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: #4b5563;
+      line-height: 1.55;
+    }
+
+    /* ========== EDUCATION & CERTS ========== */
+    .edu-entry { margin-bottom: 8px; }
+
+    .edu-entry strong { font-size: 0.92rem; }
+
+    .edu-entry .edu-detail {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    .certs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cert-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    /* ========== LANGUAGES ========== */
+    .languages { font-size: 0.9rem; color: #4b5563; }
+
+    /* ========== PRINT ========== */
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    @media print {
+      html { font-size: 13px; }
+
+      body { background: white; }
+
+      .page {
+        max-width: none;
+        box-shadow: none;
+        margin: 0;
+      }
+
+      .hero {
+        padding: 32px 36px 28px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .body { padding: 24px 36px 36px; }
+
+      .section { margin-bottom: 22px; }
+
+      .timeline-entry { margin-bottom: 18px; }
+
+      .project-card { box-shadow: none; border: 1px solid #ddd; }
+
+      a { color: var(--accent) !important; }
+
+      a[href]::after { content: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ==================== HERO ==================== -->
+    <header class="hero">
+      <h1>Alejandro Virgili</h1>
+      <div class="subtitle">Ingeniero de Software &nbsp;|&nbsp; Especialista en Java &amp; Spring Boot &nbsp;|&nbsp; Arquitecto de Microservicios</div>
+
+      <div class="contact-row">
+        <span>&#x1F4CD; Asunci&oacute;n, Paraguay</span>
+        <span>&#x2709;&#xFE0F; <a href="mailto:avirgilitech@gmail.com" style="color:#cbd5e1;">avirgilitech@gmail.com</a></span>
+        <span>&#x1F4F1; (+595) 982 739-914</span>
+      </div>
+
+      <div class="links-row">
+        <a class="pill" href="https://linkedin.com/in/alejandro-virgili" target="_blank">&#x1F517; linkedin.com/in/alejandro-virgili</a>
+        <a class="pill" href="https://github.com/avirgili-eclub" target="_blank">&#x1F419; github.com/avirgili-eclub</a>
+        <a class="pill" href="https://whoami.virgilitech.dev" target="_blank">&#x1F310; whoami.virgilitech.dev</a>
+      </div>
+    </header>
+
+    <div class="body">
+
+      <!-- ==================== PERFIL ==================== -->
+      <section class="section profile">
+        <div class="section-title">Perfil</div>
+        <p>Ingeniero de Software con m&aacute;s de 10 a&ntilde;os de experiencia especializado en microservicios con Java y Spring Boot. Trayectoria comprobada dise&ntilde;ando soluciones escalables basadas en APIs y entregando aplicaciones empresariales de alta calidad. Experiencia en .NET, servicios cloud de AWS y desarrollo m&oacute;vil con Flutter. Apasionado por el c&oacute;digo limpio, la optimizaci&oacute;n de rendimiento y la mentor&iacute;a de equipos.</p>
+      </section>
+
+      <!-- ==================== HABILIDADES ==================== -->
+      <section class="section">
+        <div class="section-title">Habilidades</div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Backend</div>
+          <div class="tags">
+            <span class="tag">Java 17</span>
+            <span class="tag">Spring Boot 3</span>
+            <span class="tag">Spring AI</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">Spring Data JPA</span>
+            <span class="tag">.NET Core</span>
+            <span class="tag">ASP.NET</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Arquitectura</div>
+          <div class="tags">
+            <span class="tag">Microservicios</span>
+            <span class="tag">APIs RESTful</span>
+            <span class="tag">GraphQL</span>
+            <span class="tag">Patr&oacute;n BFF</span>
+            <span class="tag">Message Broker</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Datos</div>
+          <div class="tags">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">SQL Server</span>
+            <span class="tag">Oracle</span>
+            <span class="tag">Supabase (Vectors)</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Cloud &amp; DevOps</div>
+          <div class="tags">
+            <span class="tag">AWS S3</span>
+            <span class="tag">AWS Lambda</span>
+            <span class="tag">Docker</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Grafana</span>
+            <span class="tag">Linux</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Frontend</div>
+          <div class="tags">
+            <span class="tag">Angular 2+</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Astro</span>
+            <span class="tag">Tailwind CSS</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">M&oacute;vil</div>
+          <div class="tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Dart</span>
+            <span class="tag">Riverpod</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <div class="skills-group-label">Autenticaci&oacute;n &amp; Seguridad</div>
+          <div class="tags">
+            <span class="tag">JWT</span>
+            <span class="tag">OAuth</span>
+            <span class="tag">Firebase Auth</span>
+            <span class="tag">Spring Security</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== EXPERIENCIA ==================== -->
+      <section class="section">
+        <div class="section-title">Experiencia Relevante</div>
+
+        <div class="timeline">
+
+          <!-- ITTI Digital -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Technical Product Manager</span>
+              <span class="entry-company">ITTI Digital</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Junio 2025 &ndash; Presente &nbsp;&bull;&nbsp; &#x1F30D; Remoto</div>
+            <ul class="entry-bullets">
+              <li>Liderando la evoluci&oacute;n de productos digitales, conectando necesidades del cliente, objetivos de negocio y equipos de ingenier&iacute;a</li>
+              <li>Definiendo MVPs, gestionando roadmaps y lanzando funcionalidades con decisiones basadas en datos</li>
+              <li>Impulsando mejoras de procesos entre equipos utilizando m&eacute;tricas de producto y negocio</li>
+              <li>El background t&eacute;cnico permite una conexi&oacute;n pr&aacute;ctica entre estrategia e implementaci&oacute;n</li>
+            </ul>
+          </div>
+
+          <!-- EClub -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Ingeniero de Software</span>
+              <span class="entry-company">EClub S.A.</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Junio 2022 &ndash; Abril 2025 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <div class="entry-stack">Java 17, Spring Boot 3, PostgreSQL, Microservicios, APIs RESTful, Angular, Grafana</div>
+            <ul class="entry-bullets">
+              <li>Dise&ntilde;&eacute; y desarroll&eacute; <strong>4+ microservicios Spring Boot</strong> para onboarding de clientes, gesti&oacute;n documental, acreditaciones y procesamiento de datos de alto volumen</li>
+              <li>Dise&ntilde;&eacute; APIs RESTful que facilitan la comunicaci&oacute;n entre servicios en el ecosistema de microservicios</li>
+              <li>Constru&iacute; soluci&oacute;n de mensajer&iacute;a as&iacute;ncrona en <strong>.NET 7</strong> con Message Broker para flujos de onboarding basados en eventos</li>
+              <li>Implement&eacute; <strong>dashboards de monitoreo con Grafana</strong> para m&eacute;tricas de rendimiento en tiempo real y toma de decisiones</li>
+              <li>Establec&iacute; <strong>pipelines de CI/CD</strong> para flujos de despliegue automatizados y confiables</li>
+              <li>Realic&eacute; <strong>code reviews</strong> y <strong>mentor&eacute; desarrolladores junior</strong> en buenas pr&aacute;cticas de Java/Spring Boot</li>
+              <li>Valid&eacute; c&oacute;digo de la app m&oacute;vil Flutter y gestion&eacute; <strong>despliegues en app stores</strong></li>
+              <li>Optimic&eacute; el rendimiento de aplicaciones mediante evaluaci&oacute;n sistem&aacute;tica e implementaci&oacute;n de buenas pr&aacute;cticas</li>
+            </ul>
+          </div>
+
+          <!-- BiggieExpress -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Analista y Desarrollador</span>
+              <span class="entry-company">BiggieExpress (Retail)</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Nov 2019 &ndash; Feb 2020 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <div class="entry-stack">ASP.NET Core 3.0, GraphQL, Angular 8+, TypeScript, Azure SQL, Azure DevOps</div>
+            <ul class="entry-bullets">
+              <li>Entregu&eacute; plataforma retail completa: app m&oacute;vil Flutter, app de seguimiento de entregas, sitio web de call center, portal de administraci&oacute;n</li>
+              <li>Constru&iacute; 5 Web APIs (Pedidos, Usuarios, Entregas, Pagos) con Identity Server centralizado en Azure</li>
+              <li>Utilic&eacute; Azure DevOps para automatizaci&oacute;n de pipelines CI/CD</li>
+            </ul>
+          </div>
+
+          <!-- OfiCompras -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Project Manager y Desarrollador</span>
+              <span class="entry-company">OfiCompras</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Jul 2019 &ndash; Mar 2020 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <div class="entry-stack">ASP.NET Core 2.1, GraphQL, Angular 7+, Azure ML, Blob Storage, Service Bus</div>
+            <ul class="entry-bullets">
+              <li>Lider&eacute; el desarrollo de ecommerce personalizado con <strong>recomendador de productos con Azure ML</strong></li>
+              <li>Implement&eacute; carga masiva de productos v&iacute;a CSV con optimizaci&oacute;n en Azure Blob Storage</li>
+              <li>Integr&eacute; API de Bancard para procesamiento de pagos con backend GraphQL</li>
+            </ul>
+          </div>
+
+          <!-- Tecnomyl -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Analista y Desarrollador</span>
+              <span class="entry-company">Tecnomyl S.A.</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Mar 2018 &ndash; Jul 2018 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <ul class="entry-bullets">
+              <li>Constru&iacute; biblioteca fotogr&aacute;fica virtual geolocalizada con controles de auditor&iacute;a basados en permisos de SharePoint</li>
+            </ul>
+          </div>
+
+          <!-- BANCARD -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Analista y Desarrollador</span>
+              <span class="entry-company">BANCARD</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; Ene 2017 &ndash; Ene 2018 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <ul class="entry-bullets">
+              <li>Sistema de gesti&oacute;n de certificaciones ISO y flujos de aprobaci&oacute;n de documentos digitales</li>
+            </ul>
+          </div>
+
+          <!-- Sudameris -->
+          <div class="timeline-entry">
+            <div class="entry-header">
+              <span class="entry-role">Desarrollador</span>
+              <span class="entry-company">Sudameris Bank</span>
+            </div>
+            <div class="entry-meta">&#x1F4C5; May 2016 &ndash; Feb 2017 &nbsp;&bull;&nbsp; &#x1F4CD; Paraguay</div>
+            <ul class="entry-bullets">
+              <li>Sistema de gesti&oacute;n de licencias de RRHH con sincronizaci&oacute;n de asistencia biom&eacute;trica entre sucursales</li>
+              <li>Sistema de reclamos de Call Center integrando servicios web de Bantotal con enrutamiento por flujo de trabajo</li>
+            </ul>
+          </div>
+
+        </div><!-- /timeline -->
+      </section>
+
+      <!-- ==================== PROYECTOS PERSONALES ==================== -->
+      <section class="section">
+        <div class="section-title">Proyectos Personales</div>
+
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <h3>&#x1F916; UCash AI &mdash; Finanzas Personales con IA</h3>
+            <div class="project-stack">Flutter + Spring Boot 3.4.2 + Spring AI + AWS S3/Lambda + PostgreSQL + Supabase</div>
+            <p>Aplicaci&oacute;n fintech full-stack: escaneo de recibos por OCR, voz a transacci&oacute;n, importaci&oacute;n de extractos bancarios, an&aacute;lisis financiero con IA. El backend implementa el patr&oacute;n BFF con funciones serverless de AWS Lambda. Autenticaci&oacute;n JWT con soporte multi-proveedor.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>&#x1F4C5; AgendateYa &mdash; Agendamiento Inteligente</h3>
+            <div class="project-stack">Spring Boot + Java 8 + Spring AI 1.0</div>
+            <p>Plataforma de agendamiento asistida por IA con optimizaci&oacute;n inteligente de turnos.</p>
+          </div>
+
+          <div class="project-card">
+            <h3>&#x1F310; Sitio Web Personal</h3>
+            <div class="project-stack">Astro 5 + React 19 + Tailwind CSS 4 + Cloudflare Pages</div>
+            <p>Sitio est&aacute;tico de alto rendimiento con terminal animada, feed de GitHub en vivo e i18n. Optimizado para Core Web Vitals.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== EDUCACI&Oacute;N ==================== -->
+      <section class="section">
+        <div class="section-title">Educaci&oacute;n</div>
+
+        <div class="edu-entry">
+          <strong>Maestr&iacute;a en Ingenier&iacute;a Inform&aacute;tica</strong>
+          <div class="edu-detail">Universidad Cono Sur de las Am&eacute;ricas, PY &nbsp;&bull;&nbsp; 2011 &ndash; 2023</div>
+        </div>
+
+        <div class="edu-entry">
+          <strong>Bachiller T&eacute;cnico en Inform&aacute;tica</strong>
+          <div class="edu-detail">Salesianito, PY &nbsp;&bull;&nbsp; 2007 &ndash; 2009</div>
+        </div>
+      </section>
+
+      <!-- ==================== CERTIFICACIONES ==================== -->
+      <section class="section">
+        <div class="section-title">Certificaciones</div>
+        <div class="certs-list">
+          <span class="cert-badge">Full-Stack Web Dev con React &mdash; HKUST</span>
+          <span class="cert-badge">Angular Avanzado &mdash; LinkedIn Learning</span>
+          <span class="cert-badge">MCSA: Aplicaciones Web &mdash; Microsoft</span>
+          <span class="cert-badge">Desarrollo de Aplicaciones Web ASP.NET MVC &mdash; Microsoft</span>
+          <span class="cert-badge">Especialista en HTML5/JS/CSS3 &mdash; Microsoft</span>
+        </div>
+      </section>
+
+      <!-- ==================== IDIOMAS ==================== -->
+      <section class="section">
+        <div class="section-title">Idiomas</div>
+        <div class="languages">Ingl&eacute;s, Espa&ntilde;ol</div>
+      </section>
+
+    </div><!-- /body -->
+  </div><!-- /page -->
+</body>
+</html>

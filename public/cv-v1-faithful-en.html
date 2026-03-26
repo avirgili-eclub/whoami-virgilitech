@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alejandro Virgili — Software Engineer</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 9.5pt;
+            line-height: 1.45;
+            color: #333;
+            background: white;
+        }
+
+        a {
+            color: #2E86C1;
+            text-decoration: underline;
+        }
+
+        .page-wrapper {
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #2E86C1;
+            margin-bottom: 0;
+        }
+
+        .header-left h1 {
+            font-size: 28pt;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+
+        .header-left .subtitle {
+            font-size: 13pt;
+            font-weight: 300;
+            color: #666;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 8.5pt;
+            color: #555;
+            line-height: 1.6;
+            padding-top: 4px;
+        }
+
+        .header-right a {
+            color: #2E86C1;
+            text-decoration: underline;
+        }
+
+        /* --- LAYOUT --- */
+        .content {
+            display: flex;
+            gap: 0;
+        }
+
+        .main-col {
+            width: 65%;
+            padding-right: 20px;
+            padding-top: 14px;
+        }
+
+        .sidebar {
+            width: 35%;
+            background: #f8f9fa;
+            padding: 14px 16px;
+            border-left: 1px solid #e9ecef;
+        }
+
+        /* --- SECTION HEADERS --- */
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #2E86C1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1.5px solid #2E86C1;
+            padding-bottom: 3px;
+            margin-bottom: 8px;
+            margin-top: 14px;
+        }
+
+        .section-title:first-child,
+        .sidebar .section-title:first-child {
+            margin-top: 0;
+        }
+
+        /* --- PROFILE --- */
+        .profile-text {
+            font-size: 9.5pt;
+            line-height: 1.5;
+            color: #444;
+            margin-bottom: 4px;
+        }
+
+        /* --- EXPERIENCE ENTRIES --- */
+        .job-entry {
+            margin-bottom: 12px;
+            page-break-inside: auto;
+        }
+
+        .job-header {
+            margin-bottom: 3px;
+        }
+
+        .company-name {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #333;
+            display: inline;
+        }
+
+        .job-role {
+            font-style: italic;
+            color: #444;
+            display: inline;
+        }
+
+        .job-date {
+            font-size: 8.5pt;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .tech-used {
+            font-style: italic;
+            font-size: 9pt;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .job-description {
+            font-size: 9.5pt;
+            margin-bottom: 5px;
+        }
+
+        .job-entry ol {
+            margin-left: 18px;
+            margin-bottom: 6px;
+        }
+
+        .job-entry ol li {
+            margin-bottom: 3px;
+        }
+
+        .job-entry ul {
+            margin-left: 18px;
+            margin-bottom: 6px;
+        }
+
+        .job-entry ul li {
+            margin-bottom: 2px;
+        }
+
+        .job-entry ol li strong,
+        .job-entry ul li strong {
+            font-weight: 600;
+        }
+
+        /* --- PERSONAL PROJECTS --- */
+        .project-entry {
+            margin-bottom: 10px;
+            page-break-inside: avoid;
+        }
+
+        .project-name {
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #333;
+            display: inline;
+        }
+
+        .project-subtitle {
+            font-style: italic;
+            color: #444;
+            display: inline;
+        }
+
+        .project-tech {
+            font-style: italic;
+            font-size: 9pt;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .project-description {
+            font-size: 9.5pt;
+        }
+
+        /* --- EDUCATION --- */
+        .edu-entry {
+            margin-bottom: 8px;
+            page-break-inside: avoid;
+        }
+
+        .edu-school {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #333;
+            display: inline;
+        }
+
+        .edu-degree {
+            font-style: italic;
+            color: #444;
+            display: inline;
+        }
+
+        .edu-date {
+            font-size: 8.5pt;
+            color: #888;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar .section-title {
+            font-size: 10pt;
+            margin-top: 14px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            font-size: 9pt;
+            padding: 1.5px 0;
+            color: #444;
+        }
+
+        .sidebar .skills-list li {
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .sidebar .skills-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2E86C1;
+        }
+
+        .sidebar .cert-list li {
+            position: relative;
+            padding-left: 10px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar .cert-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2E86C1;
+        }
+
+        .sidebar .lang-list li {
+            font-size: 9pt;
+        }
+
+        .sidebar .links-list li {
+            margin-bottom: 2px;
+        }
+
+        .sidebar .links-list a {
+            color: #2E86C1;
+            text-decoration: underline;
+            font-size: 9pt;
+        }
+
+        .sidebar .links-list .link-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* --- PRINT --- */
+        @media print {
+            body {
+                font-size: 9.5pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page-wrapper {
+                max-width: none;
+            }
+
+            .sidebar {
+                background: #f8f9fa !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .job-entry {
+                page-break-inside: auto;
+            }
+
+            .project-entry {
+                page-break-inside: avoid;
+            }
+
+            .edu-entry {
+                page-break-inside: avoid;
+            }
+
+            .section-title {
+                page-break-after: avoid;
+            }
+
+            a {
+                color: #2E86C1 !important;
+                text-decoration: underline !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="header-left">
+                <h1>Alejandro Virgili</h1>
+                <div class="subtitle">Software Engineer</div>
+            </div>
+            <div class="header-right">
+                Asunción, Paraguay<br>
+                (+595) 982 739-914<br>
+                <a href="mailto:avirgilitech@gmail.com">avirgilitech@gmail.com</a><br>
+                <a href="https://linkedin.com/in/alejandro-virgili" target="_blank">linkedin.com/in/alejandro-virgili</a><br>
+                <a href="https://github.com/avirgili-eclub" target="_blank">github.com/avirgili-eclub</a><br>
+                <a href="https://whoami.virgilitech.dev" target="_blank">whoami.virgilitech.dev</a>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <!-- MAIN COLUMN -->
+            <div class="main-col">
+
+                <!-- PROFILE -->
+                <div class="section-title">Profile</div>
+                <p class="profile-text">
+                    Software Engineer with 10+ years of experience specializing in Java and Spring Boot microservices architecture. Proven track record designing scalable API-led solutions, building RESTful services, and delivering high-quality enterprise applications. Experienced across .NET ecosystems, cloud services (AWS), and mobile development with Flutter. Passionate about clean code, performance optimization, and mentoring development teams.
+                </p>
+
+                <!-- KEY EXPERIENCE -->
+                <div class="section-title">Key Experience</div>
+
+                <!-- ITTI Digital -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">ITTI Digital</span> — <span class="job-role">Technical Product Manager</span>
+                    </div>
+                    <div class="job-date">June 2025 – Present | Remote</div>
+                    <p class="job-description">
+                        Leading digital product evolution, bridging client needs, business objectives, and engineering execution. Defining MVPs, prioritizing initiatives, managing roadmaps, and launching new features. Driving cross-team process improvements and data-driven decision-making with product and business metrics. Technical background enables a practical approach to connecting strategy with implementation.
+                    </p>
+                </div>
+
+                <!-- EClub -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">EClub S.A. Paraguay</span> — <span class="job-role">Software Engineer</span>
+                    </div>
+                    <div class="job-date">June 2022 – April 2025</div>
+                    <p class="tech-used">Java 17, Spring Boot 3, PostgreSQL, Microservices, RESTful APIs, Angular, Grafana, ASP .NET 7, Message Broker, Linux Server.</p>
+                    <p class="job-description">
+                        Designed and implemented API-led and microservices-based solutions using Java 17 and Spring Boot 3, ensuring a scalable and maintainable architecture.
+                    </p>
+                    <ol>
+                        <li><strong>Onboarding Microservice (Spring Boot)</strong> — Architected and developed a Spring Boot microservice managing the full client onboarding lifecycle — data ingestion, validation, and persistence. Implemented comprehensive unit and integration tests.</li>
+                        <li><strong>Nuxeo Mediator Microservice (Spring Boot)</strong> — Built a Spring Boot mediator service for Nuxeo integration, enabling seamless document management across the platform.</li>
+                        <li><strong>Interfisa Consumer/Producer (.NET 7)</strong> — Developed an asynchronous messaging solution in .NET 7 using Message Broker for consuming and producing client onboarding events, optimizing inter-service communication.</li>
+                        <li><strong>Additional Microservices (Spring Boot)</strong> — Developed Spring Boot microservices for accreditation, charge management, and high-volume data processing in a Data Lake environment.</li>
+                    </ol>
+                    <p class="job-description">
+                        <strong>RESTful API Development</strong>: Designed and developed RESTful APIs to facilitate inter-service communication, ensuring smooth and efficient integration across the microservices ecosystem.
+                    </p>
+                    <p class="job-description" style="margin-top: 4px;"><strong>Additional Responsibilities:</strong></p>
+                    <ul>
+                        <li><strong>Monitoring and Metrics</strong>: Implemented Grafana dashboards to monitor service performance and provide key metrics for decision-making.</li>
+                        <li><strong>Performance Optimization</strong>: Regularly evaluated and optimized application performance, applying best practices for efficiency and throughput.</li>
+                        <li><strong>CI/CD Pipelines</strong>: Participated in continuous integration and deployment workflows, ensuring reliable and automated delivery processes.</li>
+                        <li><strong>Code Reviews &amp; Mentoring</strong>: Conducted code reviews enforcing best practices and mentored junior developers on Java and Spring Boot patterns.</li>
+                        <li><strong>Flutter App Validation</strong>: Validated third-party Flutter code for the EClub mobile app before approving merges and managed app store deployments.</li>
+                    </ul>
+                </div>
+
+                <!-- BiggieExpress -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">BiggieExpress (Retail) Paraguay</span> — <span class="job-role">Analyst, Developer</span>
+                    </div>
+                    <div class="job-date">November 2019 – February 2020</div>
+                    <p class="tech-used">Asp.Net Core 3.0, GraphQL, Angular 8+, TypeScript, APIs, MVC, Microservices, Azure SQL Server.</p>
+                    <p class="job-description">Designed and implemented solutions for API-led and Microservices. Utilized Azure DevOps for CI/CD.</p>
+                    <ol>
+                        <li>Flutter and Dart-based iOS/Android App for customer product purchases.</li>
+                        <li>Android App for delivery managers to track and manage deliveries.</li>
+                        <li>Website for call center operations handling phone purchases.</li>
+                        <li>Admin website for role, user, and order management.</li>
+                        <li>Web APIs for consumption: OrderApi, UserApi, DeliveryApi, PaymentApi.</li>
+                        <li>Implemented an Identity server in Azure for centralized authentication.</li>
+                    </ol>
+                </div>
+
+                <!-- OfiCompras -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">OfiCompras Paraguay</span> — <span class="job-role">Project Manager, Developer</span>
+                    </div>
+                    <div class="job-date">July 2019 – March 2020</div>
+                    <p class="tech-used">Asp.Net Core 2.1, GraphQL, Angular 7+, TypeScript, Azure SQL Server, Azure Machine Learning, Blob Storage, Azure Processors, Azure Service Bus.</p>
+                    <p class="job-description">
+                        Led the development of a custom ecommerce solution with a product recommender using Azure machine learning service. Implemented bulk product loading via CSV and image storage in Azure Blob Storage. Established GraphQL for flexible backend communication and utilized Bancard API for payment processing.
+                    </p>
+                </div>
+
+                <!-- Tecnomyl -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">Tecnomyl S.A. Paraguay</span> — <span class="job-role">Analyst, Developer</span>
+                    </div>
+                    <div class="job-date">March 2018 – July 2018</div>
+                    <p class="tech-used">SharePoint Online, C#, Angular, TypeScript, Visual Studio, HTML5, JQUERY, Materialize CSS.</p>
+                    <p class="job-description">
+                        Developed a virtual photo library with geolocation features, embedding coordinates on mini-maps for classification. Implemented permission-based access control using SharePoint Online groups for audit compliance.
+                    </p>
+                </div>
+
+                <!-- BANCARD -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">BANCARD Paraguay</span> — <span class="job-role">Analyst, Developer</span>
+                    </div>
+                    <div class="job-date">January 2017 – January 2018</div>
+                    <p class="tech-used">SharePoint Online, WebForms, C#, Visual Studio, HTML5, Materialize, JavaScript.</p>
+                    <ol>
+                        <li>Designed and implemented a business solution for managing ISO certifications.</li>
+                        <li>Developed a digital document management system with strict approval workflows and SharePoint publishing.</li>
+                    </ol>
+                </div>
+
+                <!-- Sudameris -->
+                <div class="job-entry">
+                    <div class="job-header">
+                        <span class="company-name">Sudameris Bank Paraguay</span> — <span class="job-role">Developer</span>
+                    </div>
+                    <div class="job-date">May 2016 – February 2017</div>
+                    <p class="tech-used">Visual Studio, C#, Asp.Net MVC, HTML5, Bootstrap, JavaScript, jQuery, Entity Framework, SQL Server.</p>
+                    <ol>
+                        <li>Built a web solution for HR to manage personnel licenses and synchronized biometric attendance records across branches.</li>
+                        <li>Developed a Call Center complaint management system integrating with Bantotal via web services for customer lookup, with workflow-based claim routing and SharePoint reporting.</li>
+                    </ol>
+                </div>
+
+                <!-- PERSONAL PROJECTS -->
+                <div class="section-title">Personal Projects</div>
+
+                <div class="project-entry">
+                    <div>
+                        <span class="project-name">UCash AI</span> — <span class="project-subtitle">AI-Powered Personal Finance App</span>
+                    </div>
+                    <p class="project-tech">Flutter, Spring Boot 3.4.2, Spring AI, Java 17, PostgreSQL, AWS S3, AWS Lambda, Supabase, JWT</p>
+                    <p class="project-description">
+                        Full-stack personal finance application leveraging AI for intelligent expense management. Features include OCR receipt scanning, voice-to-transaction processing, bank statement import, and AI-powered financial analysis with personalized insights. Backend implements a BFF pattern with serverless functions (AWS Lambda) for async processing.
+                    </p>
+                </div>
+
+                <div class="project-entry">
+                    <div>
+                        <span class="project-name">AgendateYa</span> — <span class="project-subtitle">Smart Scheduling Platform</span>
+                    </div>
+                    <p class="project-tech">Spring Boot, Java 8, Spring AI 1.0</p>
+                    <p class="project-description">
+                        Scheduling platform with AI-assisted appointment management and optimization.
+                    </p>
+                </div>
+
+                <div class="project-entry">
+                    <div>
+                        <span class="project-name">Personal Website</span> — <span class="project-subtitle">whoami.virgilitech.dev</span>
+                    </div>
+                    <p class="project-tech">Astro 5, React 19, Tailwind CSS 4, TypeScript, Cloudflare Pages</p>
+                    <p class="project-description">
+                        High-performance static personal brand website built with Astro for optimal Core Web Vitals scores. Features animated terminal, live GitHub commit feed, and i18n support.
+                    </p>
+                </div>
+
+                <!-- EDUCATION -->
+                <div class="section-title">Education</div>
+
+                <div class="edu-entry">
+                    <span class="edu-school">University Cono Sur de las Américas, PY</span> — <span class="edu-degree">Master in Informatics Engineering</span>
+                    <div class="edu-date">2011 – 2023</div>
+                </div>
+
+                <div class="edu-entry">
+                    <span class="edu-school">Salesianito, PY</span> — <span class="edu-degree">BCA (Bachelor of Computer Technician)</span>
+                    <div class="edu-date">2007 – 2009</div>
+                </div>
+
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+
+                <!-- SKILLS -->
+                <div class="section-title">Skills</div>
+                <ul class="skills-list">
+                    <li>Java 17, Spring Boot 3, Spring AI</li>
+                    <li>Spring Security, Spring Data JPA</li>
+                    <li>Microservices Architecture</li>
+                    <li>RESTful APIs, GraphQL</li>
+                    <li>PostgreSQL, SQL Server, Oracle</li>
+                    <li>AWS (S3, Lambda), Supabase</li>
+                    <li>C#, .NET Core / ASP.NET</li>
+                    <li>Flutter, Dart, Riverpod</li>
+                    <li>Angular 2+, React, TypeScript</li>
+                    <li>Astro, Tailwind CSS</li>
+                    <li>HTML5, CSS3, JavaScript</li>
+                    <li>Git, GitHub, Bitbucket</li>
+                    <li>CI/CD (Azure DevOps, GitHub Actions)</li>
+                    <li>Grafana, Monitoring &amp; Metrics</li>
+                    <li>Docker, Linux Server</li>
+                    <li>JWT, OAuth, Firebase Auth</li>
+                </ul>
+
+                <!-- TRAINING & CERTIFICATIONS -->
+                <div class="section-title">Training &amp; Certifications</div>
+                <ul class="cert-list">
+                    <li>Full-Stack Web Development with React Specialization — The Hong Kong University of Science and Technology</li>
+                    <li>Angular Advanced — LinkedIn E-Learning 2020</li>
+                    <li>Microsoft Certified Solutions Associate: Web Applications</li>
+                    <li>Developing ASP.NET MVC Web Applications</li>
+                    <li>Microsoft Specialist: Programming in HTML5 with JavaScript and CSS3</li>
+                </ul>
+
+                <!-- LANGUAGES -->
+                <div class="section-title">Languages</div>
+                <ul class="lang-list">
+                    <li>English, Spanish</li>
+                </ul>
+
+                <!-- LINKS -->
+                <div class="section-title">Links</div>
+                <ul class="links-list">
+                    <li><span class="link-label">LinkedIn:</span> <a href="https://linkedin.com/in/alejandro-virgili" target="_blank">linkedin.com/in/alejandro-virgili</a></li>
+                    <li><span class="link-label">GitHub:</span> <a href="https://github.com/avirgili-eclub" target="_blank">github.com/avirgili-eclub</a></li>
+                    <li><span class="link-label">Web:</span> <a href="https://whoami.virgilitech.dev" target="_blank">whoami.virgilitech.dev</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

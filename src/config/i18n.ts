@@ -10,6 +10,13 @@ export const COPY = {
     roles: ['🏗 Product Builder', '💻 Dev Senior', '🤖 AI Integration'],
     nav: { about: 'Acerca', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto' },
     cta: { cv: 'Ver CV →', soon: 'Próximamente', read: 'Leer →', connect: 'Conectar →', view: 'Ver →' },
+    cvPanel: {
+      title: 'Curriculum Vitae',
+      preview: 'Visualizar',
+      download: 'Descargar PDF',
+      previewDesc: 'Ver en pantalla completa',
+      downloadDesc: 'Guardar como archivo PDF',
+    },
     sections: {
       explore: 'EXPLORAR',
       liveActivity: 'ACTIVIDAD EN VIVO',
@@ -54,6 +61,13 @@ export const COPY = {
     roles: ['🏗 Product Builder', '💻 Senior Dev', '🤖 AI Integration'],
     nav: { about: 'About', projects: 'Projects', blog: 'Blog', contact: 'Contact' },
     cta: { cv: 'View CV →', soon: 'Coming soon', read: 'Read →', connect: 'Connect →', view: 'View →' },
+    cvPanel: {
+      title: 'Curriculum Vitae',
+      preview: 'Preview',
+      download: 'Download PDF',
+      previewDesc: 'View fullscreen',
+      downloadDesc: 'Save as PDF file',
+    },
     sections: {
       explore: 'EXPLORE',
       liveActivity: 'LIVE ACTIVITY',
