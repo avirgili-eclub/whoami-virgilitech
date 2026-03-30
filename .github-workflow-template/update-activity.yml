@@ -23,9 +23,12 @@ jobs:
         run: |
           REPO="${{ github.event.repository.name }}"
           case "$REPO" in
-            startup-os)   DISPLAY="Startup OS"    ;;
-            alva-agentic) DISPLAY="Alva Agentic"  ;;
-            ucashai)      DISPLAY="UcashAI"       ;;
+            startup-os)        DISPLAY="Startup OS"        ;;
+            alva-agentic)      DISPLAY="Alva Agentic"      ;;
+            ucashai)           DISPLAY="UcashAI"           ;;
+            agendate-ya)       DISPLAY="AgendateYa"        ;;
+            agendate-ya-admin)  DISPLAY="AgendateYa Admin"  ;;
+            agendateya-landing) DISPLAY="AgendateYa Landing" ;;
             # Fallback: reemplaza guiones por espacios y capitaliza
             *) DISPLAY=$(echo "$REPO" | sed 's/-/ /g' | sed 's/\b./\u&/g') ;;
           esac
