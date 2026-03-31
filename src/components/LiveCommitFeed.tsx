@@ -110,8 +110,8 @@ export default function LiveCommitFeed({
     return (
       <div className="feed-wrap" aria-busy="true" aria-label="Cargando actividad">
         <ColHeader cols={cols} />
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="skeleton-row" aria-hidden="true" style={{ borderBottom: i === 4 ? 'none' : undefined }}>
+        {Array.from({ length: limit }).map((_, i) => (
+          <div key={i} className="skeleton-row" aria-hidden="true" style={{ borderBottom: i === limit - 1 ? 'none' : undefined }}>
             <div className="skeleton-block" style={{ width: '64px' }} />
             <div className="skeleton-block" style={{ width: '40px' }} />
             <div className="skeleton-block" style={{ flex: 1, opacity: 1 - i * 0.15 }} />
