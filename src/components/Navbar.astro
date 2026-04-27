@@ -1,5 +1,6 @@
 ---
 import LangToggle from './LangToggle';
+import ThemeToggle from './ThemeToggle';
 import { LINKS } from '../config/links';
 import { COPY } from '../config/i18n';
 
@@ -37,6 +38,7 @@ const en = COPY.en;
 
     <!-- Language toggle — React island -->
     <LangToggle client:load />
+    <ThemeToggle client:load />
 
     <!-- CV CTA — opens panel -->
     <button

@@ -17,10 +17,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://whoami.v
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        let theme = 'light';
+
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme === 'light' || savedTheme === 'dark') {
+            theme = savedTheme;
+          } else if (
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches
+          ) {
+            theme = 'dark';
+          }
+        } catch (_error) {
+          theme = 'light';
+        }
+
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+      })();
+    </script>
 
     <!-- SEO Primary -->
     <title>{title}</title>
