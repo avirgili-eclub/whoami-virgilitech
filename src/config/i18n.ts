@@ -6,7 +6,7 @@ export const COPY = {
     handle: '@avirgili',
     tagline: 'Software Engineering & Builder',
     available: 'Disponible',
-    bio: 'Ingeniero de software con +10 años construyendo soluciones backend robustas. Especializado en Java, Spring Boot y arquitecturas de microservicios. Apasionado por integrar IA en productos para automatizar flujos de trabajo y generar impacto real.',
+    bio: 'Ingeniero de software con +11 años construyendo soluciones backend robustas. Especializado en Java, Spring Boot y arquitecturas de microservicios. Apasionado por integrar IA en productos para automatizar flujos de trabajo y generar impacto real.',
     roles: ['🏗 Product Builder', '💻 Dev Senior', '🤖 AI Integration'],
     nav: { about: 'Acerca', projects: 'Proyectos', blog: 'Blog', contact: 'Contacto' },
     cta: { cv: 'Ver CV →', soon: 'Próximamente', read: 'Leer →', connect: 'Conectar →', view: 'Ver →' },

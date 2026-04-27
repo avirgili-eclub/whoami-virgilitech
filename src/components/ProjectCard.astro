@@ -1,6 +1,5 @@
 ---
 import type { Project } from '../config/projects';
-import { COPY } from '../config/i18n';
 
 interface Props {
   project: Project;
@@ -9,23 +8,26 @@ interface Props {
 const { project } = Astro.props;
 
 const statusLabel = {
-  active: '● Active',
-  beta:   '● Beta',
-  wip:    '● WIP',
-  paused: '● Paused',
+  active: '\u25CF Active',
+  beta: '\u25CF Beta',
+  wip: '\u25CF WIP',
+  hold: '\u25CF Hold',
+  paused: '\u25CF Paused',
 };
 
 const statusClass = {
   active: 'status-badge status-active-badge',
-  beta:   'status-badge status-beta-badge',
-  wip:    'status-badge status-wip-badge',
+  beta: 'status-badge status-beta-badge',
+  wip: 'status-badge status-wip-badge',
+  hold: 'status-badge status-hold-badge',
   paused: 'status-badge status-paused-badge',
 };
 
 const ariaStatus = {
   active: 'Activo',
-  beta:   'Beta',
-  wip:    'En progreso',
+  beta: 'Beta',
+  wip: 'En progreso',
+  hold: 'En espera',
   paused: 'Pausado',
 };
 ---

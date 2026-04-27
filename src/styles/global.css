@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ============================================================
-   DESIGN TOKENS — avirgili.dev / whoami.virgilitech.dev
-   Minimalista/Moderno · 1 acento índigo
+   DESIGN TOKENS Ã¢â‚¬â€ avirgili.dev / whoami.virgilitech.dev
+   Minimalista/Moderno Ã‚Â· 1 acento ÃƒÂ­ndigo
    ============================================================ */
 
 :root {
@@ -12,7 +12,7 @@
   --surface:      #FFFFFF;
   --border:       #E4E4E7;
 
-  /* Accent — UN solo color */
+  /* Accent Ã¢â‚¬â€ UN solo color */
   --accent:       #4F46E5;
   --accent-end:   #6366F1;
   --accent-hover: #4338CA;
@@ -688,15 +688,106 @@ p  { color: var(--text-2); }
    PROJECT CARDS
    ============================================================ */
 
+.projects-scroll-shell {
+  --projects-fade-size: 24px;
+}
+
+.projects-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.projects-scroll-hint {
+  margin: 0;
+  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+  border: 1px dashed var(--border);
+  border-radius: var(--r-full);
+  background: var(--bg-alt);
+  color: var(--text-muted);
+  font-size: 10px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.projects-scroll-hint::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+  transform: rotate(45deg) translateY(-1px);
+  animation: hint-bounce 1.5s ease-in-out infinite;
+}
+
+@keyframes hint-bounce {
+  0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.75; }
+  50% { transform: translateY(2px) rotate(45deg); opacity: 1; }
+}
+
+.projects-scrollbox {
+  position: relative;
+}
+
 .projects-stack {
   display: flex;
   flex-direction: column;
   gap: var(--sp-md);
+  max-height: 560px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  touch-action: pan-y;
+  cursor: default;
+  padding-right: 2px;
+  padding-bottom: 2px;
+}
+
+.projects-stack::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.projects-scroll-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--projects-fade-size);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease);
+}
+
+.projects-scroll-fade.top {
+  top: 0;
+  background: linear-gradient(180deg, var(--bg), rgba(0, 0, 0, 0));
+}
+
+.projects-scroll-fade.bottom {
+  bottom: 0;
+  background: linear-gradient(0deg, var(--bg), rgba(0, 0, 0, 0));
+}
+
+.projects-scroll-shell[data-overflow='true'][data-at-top='false'] .projects-scroll-fade.top,
+.projects-scroll-shell[data-overflow='true'][data-at-bottom='false'] .projects-scroll-fade.bottom {
+  opacity: 1;
+}
+
+.projects-scroll-shell[data-overflow='false'] .projects-scroll-hint {
+  display: none;
 }
 
 .project-card {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   gap: var(--sp-sm);
   padding: var(--sp-lg);
   border-radius: var(--r-lg);
@@ -760,6 +851,7 @@ p  { color: var(--text-2); }
 .status-active-badge { background: var(--status-active-bg); color: var(--status-active-text); }
 .status-beta-badge   { background: var(--status-beta-bg);   color: var(--status-beta); }
 .status-wip-badge    { background: #FFF7ED;                 color: #C2410C; }
+.status-hold-badge   { background: #FEF3C7;                 color: #92400E; }
 .status-paused-badge { background: var(--status-neutral-bg);color: var(--status-neutral); }
 
 .project-stack {
@@ -791,9 +883,13 @@ p  { color: var(--text-2); }
 
 .bottom-row {
   display: grid;
-  grid-template-columns: 1fr 420px;
+  grid-template-columns: 1fr minmax(420px, 480px);
   gap: var(--sp-2xl);
   align-items: start;
+}
+
+.bottom-row > section {
+  min-width: 0;
 }
 
 /* ============================================================
@@ -811,7 +907,7 @@ p  { color: var(--text-2); }
 .footer-text { font-size: 13px; color: var(--text-muted); }
 
 /* ============================================================
-   CV PANEL — slide-in from right
+   CV PANEL Ã¢â‚¬â€ slide-in from right
    ============================================================ */
 
 .cv-backdrop {
@@ -927,7 +1023,7 @@ p  { color: var(--text-2); }
 }
 
 /* ============================================================
-   CV VIEWER — fullscreen overlay with iframe
+   CV VIEWER Ã¢â‚¬â€ fullscreen overlay with iframe
    ============================================================ */
 
 .cv-viewer-backdrop {
@@ -1023,4 +1119,21 @@ p  { color: var(--text-2); }
   .cv-panel { width: 100%; }
   .cv-viewer { inset: 2%; }
   .cv-viewer-close { top: -8px; right: -8px; }
+
+  .feed-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .feed-col-row,
+  .commit-row {
+    min-width: 520px;
+  }
+}
+
+@media (pointer: coarse) {
+  .projects-stack {
+    cursor: auto;
+  }
 }

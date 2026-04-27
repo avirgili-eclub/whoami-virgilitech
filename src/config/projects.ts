@@ -1,4 +1,4 @@
-export type ProjectStatus = 'active' | 'beta' | 'wip' | 'paused';
+export type ProjectStatus = 'active' | 'beta' | 'wip' | 'hold' | 'paused';
 
 export interface Project {
   icon: string;
@@ -13,26 +13,36 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    icon: '💰',
+    icon: '\u{1F4C5}',
+    title: 'AgendateYA',
+    titleEN: 'AgendateYA',
+    tagline: 'SaaS de turnos con IA y voz (TTS), pagos integrados y backend Spring Boot + SST',
+    taglineEN: 'Appointment SaaS with AI + voice (TTS), integrated payments, and Spring Boot + SST backend',
+    status: 'active',
+    stack: ['AI', 'Spring Boot', 'SaaS', 'Payments', 'TTS', 'SST'],
+    href: 'https://agendateya.app/',
+  },
+  {
+    icon: '\u{1F4B0}',
     title: 'UCash AI',
     titleEN: 'UCash AI',
     tagline: 'Finanzas personales con IA y privacidad total',
     taglineEN: 'AI-powered personal finance with full privacy',
     status: 'beta',
-    stack: ['Flutter', 'AI', 'E2E Encryption'],
+    stack: ['Flutter', 'AI', 'E2E Encryption', 'VectorDB', 'SQL', 'Java 21'],
     href: 'https://ucashai.app/',
   },
   {
-    icon: '🧠',
+    icon: '\u{1F9E0}',
     title: 'Startup OS',
     titleEN: 'Startup OS',
-    tagline: 'Gestión de células de agentes IA para startups',
+    tagline: 'Gestion de celulas de agentes IA para startups',
     taglineEN: 'AI agent cell management system for startups',
-    status: 'wip',
+    status: 'hold',
     stack: ['Python', 'AI Agents', 'Dashboard'],
   },
   {
-    icon: '🤖',
+    icon: '\u{1F916}',
     title: 'Alva Agentic',
     titleEN: 'Alva Agentic',
     tagline: 'Asistente IA personal para vida y trabajo',
