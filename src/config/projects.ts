@@ -16,10 +16,10 @@ export const PROJECTS: Project[] = [
     icon: '\u{1F4C5}',
     title: 'AgendateYA',
     titleEN: 'AgendateYA',
-    tagline: 'SaaS de turnos con IA y voz (TTS), pagos integrados y backend Spring Boot + SST',
-    taglineEN: 'Appointment SaaS with AI + voice (TTS), integrated payments, and Spring Boot + SST backend',
+    tagline: 'SaaS de turnos con IA y voz (TTS), pagos integrados y backend Spring Boot + STT',
+    taglineEN: 'Appointment SaaS with AI + voice (TTS), integrated payments, and Spring Boot + STT backend',
     status: 'active',
-    stack: ['AI', 'Spring Boot', 'SaaS', 'Payments', 'TTS', 'SST'],
+    stack: ['AI', 'Spring Boot', 'SaaS', 'Payments', 'TTS', 'STT'],
     href: 'https://agendateya.app/',
   },
   {

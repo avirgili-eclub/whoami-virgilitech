@@ -57,7 +57,7 @@ export const COPY = {
     handle: '@avirgili',
     tagline: 'Software Engineering & Builder',
     available: 'Available',
-    bio: 'Software engineer with 10+ years building robust backend solutions. Specialized in Java, Spring Boot and microservices architecture. Passionate about integrating AI into products to automate workflows and deliver real impact.',
+  bio: 'Software engineer with 11+ years building robust backend solutions. Specialized in Java, Spring Boot and microservices architecture. Passionate about integrating AI into products to automate workflows and deliver real impact.',
     roles: ['🏗 Product Builder', '💻 Senior Dev', '🤖 AI Integration'],
     nav: { about: 'About', projects: 'Projects', blog: 'Blog', contact: 'Contact' },
     cta: { cv: 'View CV →', soon: 'Coming soon', read: 'Read →', connect: 'Connect →', view: 'View →' },
