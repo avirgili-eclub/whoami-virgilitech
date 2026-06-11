@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     taglineEN: 'AI-powered personal finance with full privacy',
     status: 'beta',
     stack: ['Flutter', 'AI', 'E2E Encryption', 'VectorDB', 'SQL', 'Java 21'],
-    href: 'https://ucashai.app/',
+    href: 'https://cashai-landing.pages.dev/',
   },
   {
     icon: '\u{1F9E0}',
