@@ -14,9 +14,15 @@ const en = COPY.en;
 
     <div class="hero-top">
       <!-- Avatar -->
-      <div class="avatar-wrap" aria-hidden="true">
+      <div class="avatar-wrap" aria-hidden="true" data-protected-avatar>
         <div class="avatar-ring">
-          <img class="avatar-inner" src="/avatar.jpg" alt="Alejandro Virgili" />
+          <img
+            class="avatar-inner"
+            src="/avatar.jpg"
+            alt="Alejandro Virgili"
+            draggable="false"
+            data-protected-avatar-image
+          />
         </div>
         <span
           class="status-dot"
@@ -63,5 +69,10 @@ const en = COPY.en;
   window.addEventListener('commitloaded', (e: Event) => {
     const detail = (e as CustomEvent<string>).detail;
     window.dispatchEvent(new CustomEvent('terminalcommit', { detail }));
+  });
+
+  document.querySelectorAll('[data-protected-avatar]').forEach((element) => {
+    element.addEventListener('contextmenu', (event) => event.preventDefault());
+    element.addEventListener('dragstart', (event) => event.preventDefault());
   });
 </script>
